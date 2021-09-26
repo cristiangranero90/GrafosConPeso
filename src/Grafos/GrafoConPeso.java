@@ -82,4 +82,19 @@ public class GrafoConPeso {
 		}
 		
 	}
+	
+	public String toString() {
+		StringBuilder grafoString = new StringBuilder();
+		for(int i = 0; i < A.length; i++) {
+			for (int j = 0; j < A.length; j++) {
+				if (j == A.length) {
+					grafoString.append(A[i][j] + " \n");
+				} 
+				else {
+					grafoString.append(A[i][j] + " ");
+				}				
+			}
+		}
+		return grafoString.toString();
+	}
 }
