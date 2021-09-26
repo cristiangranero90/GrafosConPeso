@@ -87,8 +87,8 @@ public class GrafoConPeso {
 		StringBuilder grafoString = new StringBuilder();
 		for(int i = 0; i < A.length; i++) {
 			for (int j = 0; j < A.length; j++) {
-				if (j == A.length) {
-					grafoString.append(A[i][j] + " \n");
+				if (j == A.length-1) {
+					grafoString.append(A[i][j] + "\n");					
 				} 
 				else {
 					grafoString.append(A[i][j] + " ");
