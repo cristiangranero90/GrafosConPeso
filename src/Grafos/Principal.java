@@ -12,6 +12,8 @@ public class Principal {
 		grafo.agregarArista(2, 4, 22);
 		
 		System.out.println(grafo.toString());
+		
+		System.out.println(BFSPeso.esConexo(grafo));
 
 	}
 

@@ -38,6 +38,13 @@ public class GrafoConPeso {
 		return A[i][j] != 0;
 	}
 	
+	public int damePesoDeArista(int i, int j) {		
+		verficarVertices(i , j);
+		verificarIguales(i, j);
+		
+		return A[i][j];
+	}
+	
 	public int vertices() {
 		return A.length;
 	}

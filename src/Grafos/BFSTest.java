@@ -41,6 +41,19 @@ public class BFSTest {
 		GrafoConPeso g = inicializarGrafo();		
 		assertFalse(BFSPeso.esConexo(g));		
 	}
+	
+	@Test
+	public void damePesoDeAristaTest() {
+		GrafoConPeso grafo = inicializarGrafo();
+		assertEquals(grafo.damePesoDeArista(2, 3), 5);		
+	}
+	
+	@Test
+	public void damePesoDeAristaInexistenteTest() {
+		GrafoConPeso grafo = inicializarGrafo();
+		assertEquals(grafo.damePesoDeArista(1, 2), 0);	
+	}
+	
 
 	private GrafoConPeso inicializarGrafo() {
 		GrafoConPeso grafoConPeso = new GrafoConPeso(5);
