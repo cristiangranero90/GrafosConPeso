@@ -1,10 +1,11 @@
 package Grafos;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class GrafoConPeso {
 	
-	int[][] A;
+	private int[][] A; // que tal, matrizAdyacencia ?
 
 	public GrafoConPeso(int vertices)  {
 		
@@ -54,6 +55,15 @@ public class GrafoConPeso {
 		}
 		return ret;		
 	}
+	
+
+	/*Verifica si arista existe, si existe retorna peso, sino retorna 0*/
+	public int obtenerPesoArista(int i, int j) {
+		if(existeArista(i, j)) return A[i][j];
+		return 0; 
+	}
+	
+
 
 	private void verificarPeso(int peso) {
 		if (peso < 1) {
@@ -82,4 +92,36 @@ public class GrafoConPeso {
 		}
 		
 	}
+
+	
+	public int[][] getA() {
+		return A;
+	}
+
+	public void print() {
+		for (int x=0; x < A.length; x++) {
+			  System.out.print("|");
+			  for (int y=0; y < A[x].length; y++) {
+			    System.out.print (A[x][y]);
+			    if (y!= A[x].length-1) System.out.print("\t");
+			  }
+			  System.out.println("|");
+			}
+	}
+
+	public int cantAristas() {
+		int ret = 0;
+		for(int i = 0 ; i < A.length ; i++) {
+			for (int j = 0; j < A[i].length; j++) {
+				if(A[i][j] > 0) {
+					ret++;
+				}
+			}
+		}
+		return ret/2;
+	}
+
+	
+	
+	
 }
