@@ -20,6 +20,17 @@ public class BFSPeso {
 		}
 		return alcanzables(grafo, 0).size() == grafo.vertices();
 	}
+	
+	public static boolean esConexoOrigen(GrafoConPeso grafo, int origen) {
+		
+		if (grafo == null) {
+			throw new IllegalArgumentException("Se intento agregar un grafo que es nulo." );
+		}
+		if (grafo.vertices() == 0) {
+			return true;
+		}
+		return alcanzables(grafo, origen).size() == grafo.vertices();
+	}
 
 	public static Set<Integer> alcanzables(GrafoConPeso grafo, int origen) {
 		Set<Integer> retorno = new HashSet<>();

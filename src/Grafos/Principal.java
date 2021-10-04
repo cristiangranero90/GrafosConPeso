@@ -14,6 +14,8 @@ public class Principal {
 		System.out.println(grafo.toString());
 		
 		System.out.println(BFSPeso.esConexo(grafo));
+		
+		System.out.println(ArbolGeneradorMinimo.kruskal(grafo).toString());
 
 	}
 
