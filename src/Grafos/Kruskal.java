@@ -17,6 +17,7 @@ public class Kruskal {
 	// TODO: Verificar si i debe ser iniciaiza en 1 o en 0, ya que en ambos casos a
 	// funcionado, pero puede surgir un error mas adelante.
 	public static GrafoConPeso kruskalBFS(GrafoConPeso grafo) {
+		long startTime = System.nanoTime();
 
 		inicializarBFS(grafo.vertices());
 
@@ -29,6 +30,10 @@ public class Kruskal {
 			AGM.agregarArista(aristaMinima.getX(), aristaMinima.getY(), aristaMinima.getPeso());
 			i++;
 		}
+
+		long endTime = System.nanoTime() - startTime; // tiempo en que se ejecuta su método
+		System.out.println("BFS en nanoseg ::: " + endTime);
+
 		return AGM;
 	}
 
@@ -91,8 +96,9 @@ public class Kruskal {
 	}
 
 	public static GrafoConPeso kruskalUnionFind(GrafoConPeso grafo) {
-		inicializarUnionFind(grafo.vertices());
+		long startTime = System.nanoTime();
 
+		inicializarUnionFind(grafo.vertices());
 		int i = 1;
 		while (i <= grafo.vertices() - 1) {
 			Arista aristaMinima = aristaMinimaSinCircuitoUnionFind(grafo);
@@ -102,6 +108,10 @@ public class Kruskal {
 			AGM.agregarArista(aristaMinima.getX(), aristaMinima.getY(), aristaMinima.getPeso());
 			i++;
 		}
+
+		long endTime = System.nanoTime() - startTime; // tiempo en que se ejecuta su método
+		System.out.println("Union Find en nanoseg :::" + endTime);
+
 		return AGM;
 	}
 
@@ -116,7 +126,7 @@ public class Kruskal {
 	}
 
 	public static Arista aristaMinimaSinCircuitoUnionFind(GrafoConPeso grafo) {
-		
+
 		int pesoMinimo = Integer.MAX_VALUE;
 		Arista aristaMinima = new Arista();
 		int[][] matrizAdyacencia = grafo.getA();
@@ -127,14 +137,13 @@ public class Kruskal {
 				int pesoArista = matrizAdyacencia[i][j];
 
 				Arista posibleArista = new Arista(i, j, matrizAdyacencia[i][j]);
-				
-		
+
 				boolean aristaLibre = !aristasAparecidas.contains(posibleArista);
 
 				if (aristaLibre && pesoArista < pesoMinimo && pesoArista > 0) {
-					
+
 					boolean generaCircuito = find(i, j);
-					if (!generaCircuito) {				
+					if (!generaCircuito) {
 						pesoMinimo = pesoArista;
 						aristaMinima.setX(i);
 						aristaMinima.setY(j);
@@ -150,22 +159,22 @@ public class Kruskal {
 
 		return aristaMinima;
 	}
-	
-	//Determina cual es la raiz del vertice que recibe (int i).
+
+	// Determina cual es la raiz del vertice que recibe (int i).
 	public static int root(int i) {
-		while(raices[i] != i) {
+		while (raices[i] != i) {
 			i = raices[i];
 		}
 		return i;
 	}
 
-
-	//Determina si 2 vertices estan en la misma componente conexa.
+	// Determina si 2 vertices estan en la misma componente conexa.
 	public static boolean find(int i, int j) {
 		return root(i) == root(j);
 	}
 
-	//Hace que la raiz de vertice apunte a la raiz del otro. (El array de raices aqui se llama "A").
+	// Hace que la raiz de vertice apunte a la raiz del otro. (El array de raices
+	// aqui se llama "A").
 	public static void union(int i, int j) {
 		int rootI = root(i);
 		int rootJ = root(j);
