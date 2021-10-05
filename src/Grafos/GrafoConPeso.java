@@ -3,7 +3,7 @@ package Grafos;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GrafoConPeso {
+public class GrafoConPeso implements Comparable<GrafoConPeso> {
 	
 	private int[][] A; // que tal, matrizAdyacencia ?
 
@@ -99,9 +99,9 @@ public class GrafoConPeso {
 	}
 
 	public void print() {
-		for (int x=0; x < A.length; x++) {
+		for (int x = 0; x < A.length; x++) {
 			  System.out.print("|");
-			  for (int y=0; y < A[x].length; y++) {
+			  for (int y = 0; y < A[x].length; y++) {
 			    System.out.print (A[x][y]);
 			    if (y!= A[x].length-1) System.out.print("\t");
 			  }
@@ -109,6 +109,7 @@ public class GrafoConPeso {
 			}
 	}
 
+	//TODO: TEST
 	public int cantAristas() {
 		int ret = 0;
 		for(int i = 0 ; i < A.length ; i++) {
@@ -121,7 +122,10 @@ public class GrafoConPeso {
 		return ret/2;
 	}
 
-	
-	
-	
+	@Override
+	public int compareTo(GrafoConPeso o) {
+		if(this.vertices() > o.vertices()) return 1;
+		if(this.vertices() < o.vertices()) return -1;
+		return 0;
+	}
 }

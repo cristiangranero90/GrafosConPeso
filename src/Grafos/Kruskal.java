@@ -14,11 +14,11 @@ public class Kruskal {
 	// Solo para UnionFind
 	private static int[] raices;
 
-	// TODO: Verificar si i debe ser iniciaiza en 1 o en 0, ya que en ambos casos a
-	// funcionado, pero puede surgir un error mas adelante.
 	public static GrafoConPeso kruskalBFS(GrafoConPeso grafo) {
 		long startTime = System.nanoTime();
 
+		// aristasAparecidas = new HashSet<>();
+		// AGM = new GrafoConPeso(grafo.vertices());
 		inicializarBFS(grafo.vertices());
 
 		int i = 1;
@@ -48,6 +48,8 @@ public class Kruskal {
 	 * minimo AGM, si no hay una arista para elegir se retorna null.
 	 * 
 	 * @param GrafoConPeso
+	 * @param HashSet<Arista> aristasAparecidas
+	 * @param GrafoConPeso    AGM
 	 * @return Arista, la mas pequeña que no haga circuito en AGM y que no este en
 	 *         "aristasAparecidas", sino null.
 	 */
@@ -61,7 +63,7 @@ public class Kruskal {
 
 				int pesoArista = matrizAdyacencia[i][j];
 
-				Arista posibleArista = new Arista(i, j, matrizAdyacencia[i][j]);
+				Arista posibleArista = new Arista(i, j, pesoArista);
 
 				boolean aristaLibre = !aristasAparecidas.contains(posibleArista);
 
@@ -96,9 +98,11 @@ public class Kruskal {
 	}
 
 	public static GrafoConPeso kruskalUnionFind(GrafoConPeso grafo) {
+
 		long startTime = System.nanoTime();
 
 		inicializarUnionFind(grafo.vertices());
+		
 		int i = 1;
 		while (i <= grafo.vertices() - 1) {
 			Arista aristaMinima = aristaMinimaSinCircuitoUnionFind(grafo);
@@ -109,8 +113,8 @@ public class Kruskal {
 			i++;
 		}
 
-		long endTime = System.nanoTime() - startTime; // tiempo en que se ejecuta su método
-		System.out.println("Union Find en nanoseg :::" + endTime);
+		long endTime = System.nanoTime() - startTime; // tiempo en que se ejecuta 
+		System.out.println("Union Find en nanoseg ::: " + endTime);
 
 		return AGM;
 	}
@@ -136,13 +140,14 @@ public class Kruskal {
 
 				int pesoArista = matrizAdyacencia[i][j];
 
-				Arista posibleArista = new Arista(i, j, matrizAdyacencia[i][j]);
+				Arista posibleArista = new Arista(i, j, pesoArista);
 
 				boolean aristaLibre = !aristasAparecidas.contains(posibleArista);
 
 				if (aristaLibre && pesoArista < pesoMinimo && pesoArista > 0) {
 
 					boolean generaCircuito = find(i, j);
+
 					if (!generaCircuito) {
 						pesoMinimo = pesoArista;
 						aristaMinima.setX(i);
