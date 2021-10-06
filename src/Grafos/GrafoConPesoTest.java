@@ -73,11 +73,11 @@ public class GrafoConPesoTest {
 	@Test
 	public void testVecinos() {
 		GrafoConPeso grafo = new GrafoConPeso(5);
-		grafo.agregarArista(0, 2, 3);
-		grafo.agregarArista(0, 3, 3);
-		grafo.agregarArista(0, 4, 3);
-
-		assertEquals(grafo.vecinos(0).size(), 3);
+		grafo.agregarArista(1, 2, 3);
+		grafo.agregarArista(1, 3, 3);
+		grafo.agregarArista(1, 4, 3);
+		
+		assertEquals(grafo.vecinos(1).size(), 3);
 	}
 	
 	@Test
@@ -91,14 +91,37 @@ public class GrafoConPesoTest {
 	}
 	
 	@Test
-	public void testPesoArista() {
-		GrafoConPeso grafo = new GrafoConPeso(3);
-		grafo.agregarArista(0, 1, 5);
-		grafo.agregarArista(1, 2, 2);
-		assertTrue(grafo.obtenerPesoArista(0, 1) == 5);
-		assertTrue(grafo.obtenerPesoArista(1, 2) == 2);
-		
-		System.out.println(grafo);
+	public void testCantidadAristas() {
+		GrafoConPeso grafo = new GrafoConPeso(5);
+		grafo.agregarArista(1, 2, 3);
+		grafo.agregarArista(1, 3, 3);
+		grafo.agregarArista(1, 4, 3);
+		assertEquals(3, grafo.cantAristas());
 	}
+	
+	@Test 
+	public void testPesoArista() {
+		GrafoConPeso grafo = new GrafoConPeso(5);
+		grafo.agregarArista(1, 2, 3);
+		assertEquals(grafo.obtenerPesoArista(1, 2), 3);
+	}
+	
+	
+	@Test
+	public void testCantidadAristasInvalida() {
+		GrafoConPeso grafo = new GrafoConPeso(5);
+		grafo.agregarArista(1, 2, 3);
+		grafo.agregarArista(1, 3, 3);
+		grafo.agregarArista(1, 4, 3);
+		assertFalse(3 != grafo.cantAristas());
+	}
+	
+	@Test 
+	public void testPesoAristaInvalido() {
+		GrafoConPeso grafo = new GrafoConPeso(5);
+		grafo.agregarArista(1, 2, 3);
+		assertFalse(grafo.obtenerPesoArista(1, 2) != 3);
+	}
+	
 
 }

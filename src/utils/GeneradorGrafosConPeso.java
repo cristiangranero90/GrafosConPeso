@@ -10,25 +10,12 @@ public class GeneradorGrafosConPeso {
 
 	private static Set<GrafoConPeso> grafos = new TreeSet<>();
 
-	public static Set<GrafoConPeso> generadorDeGrafosConPeso(int cantGrafos, int vertices, int aristas) {
-
-		while (cantGrafos > 0) {
-			GrafoConPeso grafo = new GrafoConPeso(vertices);
-
-			for (int i = 0; i < aristas; i++) {
-				Arista aristaValida = GeneradorGrafosConPeso.generarAristaValida(grafo);
-				grafo.agregarArista(aristaValida.getX(), aristaValida.getY(), aristaValida.getPeso());
-			}
-
-			grafos.add(grafo);
-			cantGrafos--;
-		}
-
-		return grafos;
-	}
-
 	public static GrafoConPeso generadorDeGrafoConPeso(int vertices, int aristas) {
-
+		
+		if(aristas > (vertices*(vertices -1 ))/2) throw new IllegalArgumentException("Aristas debe ser menor o igual a (vertices*(vertices-1))/2, y los datos entregados son : Vertices : " + vertices + " Aristas : "+ aristas);
+		if(aristas <= 0 ) throw new IllegalArgumentException("Aristas debe ser mayor a 0");
+		if(vertices <= 0 ) throw new IllegalArgumentException("Vertices debe ser mayor a 0");
+		
 		GrafoConPeso grafo = new GrafoConPeso(vertices);
 
 		for (int i = 0; i < aristas; i++) {
@@ -39,33 +26,30 @@ public class GeneradorGrafosConPeso {
 		return grafo;
 	}
 
-	private static Arista generarAristaValida(GrafoConPeso grafo) {
+	public static Arista generarAristaValida(GrafoConPeso grafo) {
 		int vertices = grafo.vertices();
 
-		int verticeX = GeneradorGrafosConPeso.numeroRamdonEntre(0, vertices - 1);
-		int verticeY = GeneradorGrafosConPeso.numeroRamdonEntre(0, vertices - 1);
-		int peso = GeneradorGrafosConPeso.numeroRamdonEntre(1, 100);
+		int verticeX = Utils.numeroRamdonEntre(0, vertices - 1);
+		int verticeY = Utils.numeroRamdonEntre(0, vertices - 1);
+		int peso = Utils.numeroRamdonEntre(1, 100);
 
 		while (verticeX == verticeY) {
-			verticeX = GeneradorGrafosConPeso.numeroRamdonEntre(0, vertices - 1);
-			verticeY = GeneradorGrafosConPeso.numeroRamdonEntre(0, vertices - 1);
+			verticeX = Utils.numeroRamdonEntre(0, vertices - 1);
+			verticeY = Utils.numeroRamdonEntre(0, vertices - 1);
 		}
 
 		while (grafo.existeArista(verticeX, verticeY)) {
-			verticeX = GeneradorGrafosConPeso.numeroRamdonEntre(0, vertices - 1);
-			verticeY = GeneradorGrafosConPeso.numeroRamdonEntre(0, vertices - 1);
+			verticeX = Utils.numeroRamdonEntre(0, vertices - 1);
+			verticeY = Utils.numeroRamdonEntre(0, vertices - 1);
 			while (verticeX == verticeY) {
-				verticeX = GeneradorGrafosConPeso.numeroRamdonEntre(0, vertices - 1);
-				verticeY = GeneradorGrafosConPeso.numeroRamdonEntre(0, vertices - 1);
+				verticeX = Utils.numeroRamdonEntre(0, vertices - 1);
+				verticeY = Utils.numeroRamdonEntre(0, vertices - 1);
 			}
 		}
 
 		return new Arista(verticeX, verticeY, peso);
 	}
 
-	public static int numeroRamdonEntre(int min, int max) {
-		return (int) Math.floor(Math.random() * (max - min + 1) + min);
-	}
 	
 	// Generar 50 grafos cada grafo con 10 vertices mas que el anterior.
 	private static void grafosParaAnalizar() {
@@ -74,7 +58,7 @@ public class GeneradorGrafosConPeso {
 		for (int i = 0; i < 50; i++) {
 			vertices++;
 			aristas++;
-			if(vertices > 20) aristas = aristas + 4;
+			
 			grafos.add(generadorDeGrafoConPeso(vertices, aristas));
 		}
 	}
@@ -82,6 +66,7 @@ public class GeneradorGrafosConPeso {
 	public static void main(String[] args) {
 		
 		grafosParaAnalizar();
+	
 		
 		StringBuilder breakLine = new StringBuilder("***************************************");
 		StringBuilder descripcionGrafo = new StringBuilder();

@@ -37,7 +37,7 @@ public class Kruskal {
 		return AGM;
 	}
 
-	public static void inicializarBFS(int cantVertices) {
+	static void inicializarBFS(int cantVertices) {
 		aristasAparecidas = new HashSet<>();
 		AGM = new GrafoConPeso(cantVertices);
 	}
@@ -53,15 +53,15 @@ public class Kruskal {
 	 * @return Arista, la mas pequeña que no haga circuito en AGM y que no este en
 	 *         "aristasAparecidas", sino null.
 	 */
-	public static Arista aristaMinimaSinCircuitoBFS(GrafoConPeso grafo) {
+	static Arista aristaMinimaSinCircuitoBFS(GrafoConPeso grafo) {
 		int pesoMinimo = Integer.MAX_VALUE;
 		Arista aristaMinima = new Arista();
-		int[][] matrizAdyacencia = grafo.getA();
 
-		for (int i = 0; i < matrizAdyacencia.length; i++) {
-			for (int j = 0; j < matrizAdyacencia[i].length; j++) {
 
-				int pesoArista = matrizAdyacencia[i][j];
+		for (int i = 0; i < grafo.vertices(); i++) {
+			for (int j = 0; j < grafo.vertices(); j++) {
+				if(i == j) break;
+				int pesoArista = grafo.obtenerPesoArista(i, j);
 
 				Arista posibleArista = new Arista(i, j, pesoArista);
 
@@ -97,6 +97,7 @@ public class Kruskal {
 		return aristaMinima;
 	}
 
+
 	public static GrafoConPeso kruskalUnionFind(GrafoConPeso grafo) {
 
 		long startTime = System.nanoTime();
@@ -119,7 +120,7 @@ public class Kruskal {
 		return AGM;
 	}
 
-	public static void inicializarUnionFind(int cantVertices) {
+	static void inicializarUnionFind(int cantVertices) {
 		aristasAparecidas = new HashSet<>();
 		AGM = new GrafoConPeso(cantVertices);
 		// Se setea a cada vertice como raiz de si mismo.
@@ -129,16 +130,16 @@ public class Kruskal {
 		}
 	}
 
-	public static Arista aristaMinimaSinCircuitoUnionFind(GrafoConPeso grafo) {
+	static Arista aristaMinimaSinCircuitoUnionFind(GrafoConPeso grafo) {
 
 		int pesoMinimo = Integer.MAX_VALUE;
 		Arista aristaMinima = new Arista();
-		int[][] matrizAdyacencia = grafo.getA();
+	
 
-		for (int i = 0; i < matrizAdyacencia.length; i++) {
-			for (int j = 0; j < matrizAdyacencia[i].length; j++) {
-
-				int pesoArista = matrizAdyacencia[i][j];
+		for (int i = 0; i < grafo.vertices(); i++) {
+			for (int j = 0; j < grafo.vertices(); j++) {
+				if(i == j) break;
+				int pesoArista = grafo.obtenerPesoArista(i,j);
 
 				Arista posibleArista = new Arista(i, j, pesoArista);
 
@@ -166,7 +167,7 @@ public class Kruskal {
 	}
 
 	// Determina cual es la raiz del vertice que recibe (int i).
-	public static int root(int i) {
+	static int root(int i) {
 		while (raices[i] != i) {
 			i = raices[i];
 		}
@@ -174,15 +175,40 @@ public class Kruskal {
 	}
 
 	// Determina si 2 vertices estan en la misma componente conexa.
-	public static boolean find(int i, int j) {
+	static boolean find(int i, int j) {
 		return root(i) == root(j);
 	}
 
 	// Hace que la raiz de vertice apunte a la raiz del otro. (El array de raices
 	// aqui se llama "A").
-	public static void union(int i, int j) {
+	static void union(int i, int j) {
 		int rootI = root(i);
 		int rootJ = root(j);
 		raices[rootI] = rootJ;
+	}
+	
+	
+	static HashSet<Arista> getAristasAparecidas() {
+		return aristasAparecidas;
+	}
+
+	static void setAristasAparecidas(HashSet<Arista> aristasAparecidas) {
+		Kruskal.aristasAparecidas = aristasAparecidas;
+	}
+
+	static GrafoConPeso getAGM() {
+		return AGM;
+	}
+
+	static void setAGM(GrafoConPeso aGM) {
+		AGM = aGM;
+	}
+
+	static int[] getRaices() {
+		return raices;
+	}
+
+	static void setRaices(int[] raices) {
+		Kruskal.raices = raices;
 	}
 }

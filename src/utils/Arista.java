@@ -5,14 +5,35 @@ public class Arista {
 	private int x;
 	private int y;
 	private int peso;
-	
+
 	public Arista(int x, int y, int peso) {
 		super();
+
+		verificarPesoValido(peso);
+		verificarVerticesIguales(x, y);
+		verificarVerticeValido(x);
+		verificarVerticeValido(y);
+
 		this.x = x;
 		this.y = y;
 		this.peso = peso;
 	}
-	
+
+	private void verificarVerticeValido(int x2) {
+		if (x2 < 0)
+			throw new IllegalArgumentException("Vertice debe ser mayor a 0, valor dado : " + x2);
+	}
+
+	private void verificarVerticesIguales(int x2, int y2) {
+		if (x2 == y2)
+			throw new IllegalArgumentException("Los vertices no pueden ser iguales");
+	}
+
+	private void verificarPesoValido(int peso2) {
+		if (peso2 < 0)
+			throw new IllegalArgumentException("Peso debe ser mayor a 0, valor dado : " + peso2);
+	}
+
 	public Arista(int x, int y) {
 		super();
 		this.x = x;
@@ -26,18 +47,23 @@ public class Arista {
 	public int getX() {
 		return x;
 	}
+
 	public void setX(int x) {
 		this.x = x;
 	}
+
 	public int getY() {
 		return y;
 	}
+
 	public void setY(int y) {
 		this.y = y;
 	}
+
 	public int getPeso() {
 		return peso;
 	}
+
 	public void setPeso(int peso) {
 		this.peso = peso;
 	}
@@ -71,10 +97,5 @@ public class Arista {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
 
 }
-	

@@ -11,51 +11,54 @@ import Grafos.GrafoConPeso;
 
 public class GeneradorGrafosConPesoTest {
 
-	private Set<GrafoConPeso> grafos;
-	private int cantGrafos = 5;
-	private int cantVertices = 5;
-	private int cantAristas = 5;
+	@Test(expected = IllegalArgumentException.class) 
+	public void testCantAritasDistitntoDeCero() {
+		GrafoConPeso grafo = GeneradorGrafosConPeso.generadorDeGrafoConPeso(5, 0);	
+	}
 	
-	@Before
-	public void setUp() throws Exception {
-		int cantGrafos = 5;
-		int cantVertices = 5;
-		int cantAristas = 5;
-		grafos = GeneradorGrafosConPeso.generadorDeGrafosConPeso(cantGrafos, cantVertices, cantAristas );
+	@Test(expected = IllegalArgumentException.class) 
+	public void testCantVerticesDistitntoDeCero() {
+		GrafoConPeso grafo = GeneradorGrafosConPeso.generadorDeGrafoConPeso(0, 5);	
+	}
+	
+	@Test(expected = IllegalArgumentException.class) // Caso borde, de 1 a 9 es vaildo.
+	public void testCantAritasValidas() {
+		GrafoConPeso grafo = GeneradorGrafosConPeso.generadorDeGrafoConPeso(5, 10);	
+	}
+	
+	@Test
+	public void testGeneradoArista() {
+		GrafoConPeso grafo = new GrafoConPeso(3);
+		grafo.agregarArista(0, 1, 5);
+		grafo.agregarArista(0, 2, 10);
+		Arista arista = GeneradorGrafosConPeso.generarAristaValida(grafo);
+		grafo.agregarArista(arista.getX(), arista.getY(), 10);
+		assertTrue(grafo.existeArista(1, 2));
+	}
+	
+	@Test
+	public void testGeneradorGrafoVerticesValidos() {
+		GrafoConPeso grafo = GeneradorGrafosConPeso.generadorDeGrafoConPeso(10, 5);
+		assertTrue(grafo.vertices() == 10);
 		
 	}
-	
 	@Test
-	public void cantGrafosCorrectaTest() {
-		assertTrue(grafos.size() == cantGrafos);
-	}
-
-	@Test
-	public void verticesCorrectosTest() {
-		for (GrafoConPeso grafo : grafos) {
-			boolean cantVerticesCorrectos = grafo.vertices() == cantVertices;
-			assertTrue(cantVerticesCorrectos);
-		}
+	public void testGeneradorGrafoAristaValidos() {
+		GrafoConPeso grafo = GeneradorGrafosConPeso.generadorDeGrafoConPeso(10, 5);
+		assertTrue(grafo.cantAristas() == 5);
 	}
 	
 	@Test
-	public void aristasCorrectas() {
-		for (GrafoConPeso grafo : grafos) {
-			boolean  cantAristasCorrectas = grafo.cantAristas() == cantAristas;
-			assertTrue(cantAristasCorrectas);
-		}
+	public void testGeneradorGrafoVerticesInvalidos() {
+		GrafoConPeso grafo = GeneradorGrafosConPeso.generadorDeGrafoConPeso(10, 5);
+		assertFalse(grafo.vertices() == 5);
+		
+	}
+	@Test
+	public void testGeneradorGrafoAristaInvalidos() {
+		GrafoConPeso grafo = GeneradorGrafosConPeso.generadorDeGrafoConPeso(10, 5);
+		assertFalse(grafo.cantAristas() == 10);
 	}
 	
 	
-	
-	/*
-	 * @Test public void verGrafos() { for (GrafoConPeso grafo : grafos) { boolean
-	 * cantVerticesCorrectos = grafo.vertices() == cantVertices;
-	 * assertTrue(cantVerticesCorrectos); grafo.print();
-	 * System.out.println("***********************************"); } }
-	 */
-	 
-	 
-	
-
 }

@@ -93,11 +93,6 @@ public class GrafoConPeso implements Comparable<GrafoConPeso> {
 		
 	}
 
-	
-	public int[][] getA() {
-		return A;
-	}
-
 	public void print() {
 		for (int x = 0; x < A.length; x++) {
 			  System.out.print("|");
@@ -109,7 +104,6 @@ public class GrafoConPeso implements Comparable<GrafoConPeso> {
 			}
 	}
 
-	//TODO: TEST
 	public int cantAristas() {
 		int ret = 0;
 		for(int i = 0 ; i < A.length ; i++) {
