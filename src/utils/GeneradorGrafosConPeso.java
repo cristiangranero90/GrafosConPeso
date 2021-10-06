@@ -58,7 +58,7 @@ public class GeneradorGrafosConPeso {
 		for (int i = 0; i < 50; i++) {
 			vertices++;
 			aristas++;
-			
+			if(vertices > 20) aristas = aristas + 5;
 			grafos.add(generadorDeGrafoConPeso(vertices, aristas));
 		}
 	}

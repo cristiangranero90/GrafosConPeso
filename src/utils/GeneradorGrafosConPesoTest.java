@@ -23,7 +23,7 @@ public class GeneradorGrafosConPesoTest {
 	
 	@Test(expected = IllegalArgumentException.class) // Caso borde, de 1 a 9 es vaildo.
 	public void testCantAritasValidas() {
-		GrafoConPeso grafo = GeneradorGrafosConPeso.generadorDeGrafoConPeso(5, 10);	
+		GrafoConPeso grafo = GeneradorGrafosConPeso.generadorDeGrafoConPeso(5, 11);	
 	}
 	
 	@Test

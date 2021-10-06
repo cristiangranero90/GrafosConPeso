@@ -8,12 +8,10 @@ public class Arista {
 
 	public Arista(int x, int y, int peso) {
 		super();
-
 		verificarPesoValido(peso);
 		verificarVerticesIguales(x, y);
 		verificarVerticeValido(x);
 		verificarVerticeValido(y);
-
 		this.x = x;
 		this.y = y;
 		this.peso = peso;
@@ -36,6 +34,9 @@ public class Arista {
 
 	public Arista(int x, int y) {
 		super();
+		verificarVerticesIguales(x, y);
+		verificarVerticeValido(x);
+		verificarVerticeValido(y);
 		this.x = x;
 		this.y = y;
 	}

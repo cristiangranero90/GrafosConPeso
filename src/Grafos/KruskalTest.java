@@ -28,8 +28,6 @@ public class KruskalTest {
 		assertTrue(AGM_BFS.existeArista(0, 1));
 		assertTrue(AGM_BFS.existeArista(2, 1));
 		assertTrue(AGM_BFS.existeArista(2, 3));
-		//AGM_BFS.print();
-		//System.out.println("****************************");
 	}
 
 	@Test
@@ -43,7 +41,6 @@ public class KruskalTest {
 		assertTrue(AGM_UnionFind.existeArista(0, 1));
 		assertTrue(AGM_UnionFind.existeArista(2, 1));
 		assertTrue(AGM_UnionFind.existeArista(2, 3));
-		//AGM_UnionFind.print();
 	}
 	
 	@Test
@@ -70,8 +67,6 @@ public class KruskalTest {
 		
 		assertTrue(aristaMinima.getX() == 2 || aristaMinima.getX() == 3);
 		assertTrue(aristaMinima.getY() == 2 || aristaMinima.getY() == 3);
-	
-		
 	}
 	
 	@Test

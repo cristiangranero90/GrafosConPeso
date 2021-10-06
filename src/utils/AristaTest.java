@@ -18,11 +18,11 @@ public class AristaTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testVerticeXMayorACero() {
-		Arista arista = new Arista(2,0,10);	
+		Arista arista = new Arista(-1,0,10);	
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void testVerticeYMayorACero() {
-		Arista arista = new Arista(0,2,10);	
+		Arista arista = new Arista(0,-1,10);	
 	}
 	
 	
