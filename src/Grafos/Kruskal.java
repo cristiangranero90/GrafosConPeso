@@ -15,10 +15,7 @@ public class Kruskal {
 	private static int[] raices;
 
 	public static GrafoConPeso kruskalBFS(GrafoConPeso grafo) {
-		long startTime = System.nanoTime();
 
-		// aristasAparecidas = new HashSet<>();
-		// AGM = new GrafoConPeso(grafo.vertices());
 		inicializarBFS(grafo.vertices());
 
 		int i = 1;
@@ -30,9 +27,6 @@ public class Kruskal {
 			AGM.agregarArista(aristaMinima.getX(), aristaMinima.getY(), aristaMinima.getPeso());
 			i++;
 		}
-
-		long endTime = System.nanoTime() - startTime; // tiempo en que se ejecuta su método
-		System.out.println("BFS en nanoseg ::: " + endTime);
 
 		return AGM;
 	}
@@ -57,10 +51,10 @@ public class Kruskal {
 		int pesoMinimo = Integer.MAX_VALUE;
 		Arista aristaMinima = new Arista();
 
-
 		for (int i = 0; i < grafo.vertices(); i++) {
 			for (int j = 0; j < grafo.vertices(); j++) {
-				if(i == j) break;
+				if (i == j)
+					break;
 				int pesoArista = grafo.obtenerPesoArista(i, j);
 
 				Arista posibleArista = new Arista(i, j, pesoArista);
@@ -97,13 +91,10 @@ public class Kruskal {
 		return aristaMinima;
 	}
 
-
 	public static GrafoConPeso kruskalUnionFind(GrafoConPeso grafo) {
 
-		long startTime = System.nanoTime();
-
 		inicializarUnionFind(grafo.vertices());
-		
+
 		int i = 1;
 		while (i <= grafo.vertices() - 1) {
 			Arista aristaMinima = aristaMinimaSinCircuitoUnionFind(grafo);
@@ -113,9 +104,6 @@ public class Kruskal {
 			AGM.agregarArista(aristaMinima.getX(), aristaMinima.getY(), aristaMinima.getPeso());
 			i++;
 		}
-
-		long endTime = System.nanoTime() - startTime; // tiempo en que se ejecuta 
-		System.out.println("Union Find en nanoseg ::: " + endTime);
 
 		return AGM;
 	}
@@ -134,12 +122,12 @@ public class Kruskal {
 
 		int pesoMinimo = Integer.MAX_VALUE;
 		Arista aristaMinima = new Arista();
-	
 
 		for (int i = 0; i < grafo.vertices(); i++) {
 			for (int j = 0; j < grafo.vertices(); j++) {
-				if(i == j) break;
-				int pesoArista = grafo.obtenerPesoArista(i,j);
+				if (i == j)
+					break;
+				int pesoArista = grafo.obtenerPesoArista(i, j);
 
 				Arista posibleArista = new Arista(i, j, pesoArista);
 
@@ -186,8 +174,7 @@ public class Kruskal {
 		int rootJ = root(j);
 		raices[rootI] = rootJ;
 	}
-	
-	
+
 	static HashSet<Arista> getAristasAparecidas() {
 		return aristasAparecidas;
 	}

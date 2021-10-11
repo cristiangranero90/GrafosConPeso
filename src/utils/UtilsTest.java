@@ -11,10 +11,10 @@ public class UtilsTest {
 		int numeroRandom = Utils.numeroRamdonEntre(10, 20);
 		assertTrue(numeroRandom >= 10 && numeroRandom <= 20);
 	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testNumeroInvalido() {
 		int numeroRandom = Utils.numeroRamdonEntre(20, 10);
 	}
-	
 
 }
